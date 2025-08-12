@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metin Özetleme</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <img src="../static/img/logo.svg" alt="logo" width="30" height="30">
+        <ul class="main-list">
+            <li class="list__item">
+                <a href="/index">
+                    <img src="../static/img/home.svg" alt="home" width="20" height="20">
+                </a>
+            </li>
+        </ul>
+    </header>
+
+    <main>
+        {% block content %}
+        <form action="{{ url_for('summarize') }}" method="post" class="creat-form">
+            <div class="form__card">
+                <img class="card__img" src="static\img\summary.png" width="250" height="250" alt="summarize_icon">
+                <label for="input_text">
+                    <textarea class="form__text" name="input_text" id="input_text" cols="30" rows="10" required placeholder="Özetlemek istediğiniz metni buraya yazın...">{{ request.form.input_text }}</textarea>
+                </label>
+                
+                <button class="form__button" type="submit">Özetle</button>
+            </div>
+        </form>
+
+        {% if summary %}
+        <div class="form__card">
+            <h2>📌 Özet</h2>
+            <p class="form__text">{{ summary }}</p>
+        </div>
+        {% endif %}
+        {% endblock %}
+    </main>
+</body>
+</html>
